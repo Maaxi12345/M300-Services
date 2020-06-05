@@ -54,7 +54,7 @@ end
 ```Ruby
 $ vagrant up
 ```
-Somit wird die VM gestarten. 
+Somit wird die VM gestartet. 
 
 # Git
 

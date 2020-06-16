@@ -53,12 +53,12 @@ ___
 ## Firewall
 **Über welche Ports wird der Zugang zugelassen:**
 
- Port | 
---- | ---
-80 |
-443 |
-3306 | 
-22 |
+| Port | 
+|--- | 
+|80 |
+|443 |
+|3306 | 
+|22 |
 
 **Wie wurde das gemacht?**
 
@@ -79,6 +79,7 @@ sudo ufw allow 3306/tcp
 80 |8080
 3306 | 3306
 22 |2222
+
 **Wie wurde das gemacht?**
 
 Im Vagrantfile habe ich folgende Zeilen hinzugefügt.

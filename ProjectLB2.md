@@ -27,9 +27,11 @@ ___
 
 **IP:** Static (192.168.1.99)
 
+***
+
 ## Applikationen & Programme
 
-Was wurde alles installiert.
+**Was wurde alles installiert?**
 
 
 |Programm | Was? |
@@ -45,6 +47,31 @@ Was wurde alles installiert.
 | php-gettext | Liest gettext-MO-Dateien direkt und benötigt dafür nur PHP |
 | a2enmod rewrite | enabled das apache2 Modul namens rewrite | 
 
+
+# Security
+
+## Firewall
+**Über welche Ports wird der Zugang zugelassen:**
+
+ Port | 
+--- | ---
+80 |
+443 |
+3306 | 
+22 |
+
+**Wie wurde das gemacht?**
+
+Indem ich im provision.sh folgende Zeilen hinzugefügt habe.
+
+```Ruby
+sudo ufw enable
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 22/tcp
+sudo ufw allow 3306/tcp
+```
+***
 ## Portforwarding
 
  Port | Portforward 
@@ -52,5 +79,15 @@ Was wurde alles installiert.
 80 |8080
 3306 | 3306
 22 |2222
+**Wie wurde das gemacht?**
 
-# Security
+Im Vagrantfile habe ich folgende Zeilen hinzugefügt.
+```Ruby
+    db.vm.network "forwarded_port", guest: 80, host: 8080
+    db.vm.network "forwarded_port", guest: 3306, host: 3306
+    db.vm.network "forwarded_port", guest: 443, host: 8443
+```
+Der Port **22** wird automatisch beim aufstarten von Vagrant auf den Port 
+**2222** geforwarded.
+
+***

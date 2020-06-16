@@ -63,5 +63,5 @@ Markdown ist eine einfache Auszeichnungssprache, die von John Gruber und Aaron S
 
 Markdown kann mit jedem simplen Text-Editor oder mit speziellen Markdown-Editoren erstellt werden. Mit Hilfe von Programmier-Scripten lässt sich Markdown in die unterschiedlichsten Formate umwandeln, beispielsweise auch in HTML. Der Vorteil von Markdown wird schnell deutlich, wenn man ein HTML-Dokument mit der entsprechenden Markdown-Syntax vergleicht. Ein einfacher Text mit einer Überschrift, einem Absatz und einer Liste sieht in HTML so aus:
 ## Cheatsheet:
-https://github.com/adam-p/markdown-here.wiki.git
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 # Systemsicherheit

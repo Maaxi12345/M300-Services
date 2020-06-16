@@ -92,3 +92,40 @@ Der Port **22** wird automatisch beim aufstarten von Vagrant auf den Port
 **2222** geforwarded.
 
 ***
+## Reverse Proxy
+
+**Schritt 1:**
+
+apachemodule aktivieren
+* Im provision.sh wird folgendes hinzugefügt.
+  
+  ```Ruby
+  sudo a2enmod proxy
+  sudo a2enmod proxy_html
+  sudo a2enmod proxy_http
+  ```
+
+
+
+
+**Schritt 2:**
+
+In `sites-enabled/default-ssl.conf` folgede Dinge eingetragen:
+* ```Ruby
+    ProxyRequests Off
+            <Proxy *>
+                    Order deny,allow
+                    Allow from all
+            </Proxy>
+
+    #Weiterleitungen master
+    ProxyPass /master http://master
+    ProxyPassReverse /master http://master
+   ```
+
+
+*  ```Ruby
+    ServerName localhost
+   ```
+
+Ich habe die beiden "Blöcke so eingefügt, dass es ein wenig Sinn macht. Siehe auch [**default-ssl**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/sites-enabled/default-ssl) (bei Zeile 8 & 84)

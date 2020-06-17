@@ -167,3 +167,87 @@ Weitere Infos bei [**Netzmafia**](http://www.netzmafia.de/skripten/internet/ssh-
 
 ***
 # Testing
+
+### 1. Test: Startup
+Beim ersten Test geht es einfach darum ob die Umgebung überhaupt startet.
+
+Dafür habe ich im enstrechendem Verzeichniss den Command  *`Vagrant up`* aus geführt.
+
+**Output:**
+```Ruby
+$ vagrant up
+Bringing machine 'db' up with 'virtualbox' provider...
+Bringing machine 'web' up with 'virtualbox' provider...
+==> db: Checking if box 'hashicorp/precise32' version '1.0.0' is up to date...
+==> db: Clearing any previously set forwarded ports...
+==> db: Clearing any previously set network interfaces...
+==> db: Preparing network interfaces based on configuration...
+    db: Adapter 1: nat
+    db: Adapter 2: bridged
+==> db: Forwarding ports...
+    db: 80 (guest) => 8080 (host) (adapter 1)
+    db: 3306 (guest) => 3306 (host) (adapter 1)
+    db: 443 (guest) => 8443 (host) (adapter 1)
+    db: 22 (guest) => 2222 (host) (adapter 1)
+==> db: Running 'pre-boot' VM customizations...
+==> db: Booting VM...
+==> db: Waiting for machine to boot. This may take a few minutes...
+    db: SSH address: 127.0.0.1:2222
+    db: SSH username: vagrant
+    db: SSH auth method: private key
+==> db: Machine booted and ready!
+==> db: Checking for guest additions in VM...
+    db: The guest additions on this VM do not match the installed version of
+    db: VirtualBox! In most cases this is fine, but in rare cases it can
+    db: prevent things such as shared folders from working properly. If you see
+    db: shared folder errors, please make sure the guest additions within the
+    db: virtual machine match the version of VirtualBox you have installed on
+    db: your host and reload your VM.
+    db:
+    db: Guest Additions Version: 5.2.12
+    db: VirtualBox Version: 6.1
+==> db: [vagrant-hostsupdater] Checking for host entries
+==> db: [vagrant-hostsupdater]   found entry for: 192.168.1.99 mysql
+==> db: Setting hostname...
+==> db: Configuring and enabling network interfaces...
+==> db: Mounting shared folders...
+    db: /vagrant => C:/Users/u69372/Desktop/TBZ/3 Lehrjahr/300/repository300/M300-Services/mysql
+==> db: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> db: flag to force provisioning. Provisioners marked to run always will still run.
+==> web: Checking if box 'hashicorp/precise32' version '1.0.0' is up to date...
+==> web: Clearing any previously set forwarded ports...
+==> web: Fixed port collision for 22 => 2222. Now on port 2200.
+==> web: Clearing any previously set network interfaces...
+==> web: Preparing network interfaces based on configuration...
+    web: Adapter 1: nat
+    web: Adapter 2: bridged
+==> web: Forwarding ports...
+    web: 22 (guest) => 2200 (host) (adapter 1)
+==> web: Running 'pre-boot' VM customizations...
+==> web: Booting VM...
+==> web: Waiting for machine to boot. This may take a few minutes...
+    web: SSH address: 127.0.0.1:2200
+    web: SSH username: vagrant
+    web: SSH auth method: private key
+==> web: Machine booted and ready!
+==> web: Checking for guest additions in VM...
+    web: The guest additions on this VM do not match the installed version of
+    web: VirtualBox! In most cases this is fine, but in rare cases it can
+    web: prevent things such as shared folders from working properly. If you see
+    web: shared folder errors, please make sure the guest additions within the
+    web: virtual machine match the version of VirtualBox you have installed on
+    web: your host and reload your VM.
+    web:
+    web: Guest Additions Version: 5.2.12
+    web: VirtualBox Version: 6.1
+==> web: [vagrant-hostsupdater] Checking for host entries
+==> web: [vagrant-hostsupdater]   found entry for: 192.168.1.88 client
+==> web: Setting hostname...
+==> web: Configuring and enabling network interfaces...
+==> web: Mounting shared folders...
+    web: /vagrant => C:/Users/u69372/Desktop/TBZ/3 Lehrjahr/300/repository300/M300-Services/mysql
+==> web: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> web: flag to force provisioning. Provisioners marked to run always will still run.
+```
+
+Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")

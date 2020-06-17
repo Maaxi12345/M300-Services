@@ -168,7 +168,7 @@ Weitere Infos bei [**Netzmafia**](http://www.netzmafia.de/skripten/internet/ssh-
 ***
 # Testing
 
-### 1. Test: Startup
+### **1. Test: Startup**
 Beim ersten Test geht es einfach darum ob die Umgebung überhaupt startet.
 
 Dafür habe ich im enstrechendem Verzeichniss den Command  *`Vagrant up`* aus geführt.
@@ -252,7 +252,7 @@ Bringing machine 'web' up with 'virtualbox' provider...
 
 Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")
 
-### 2. Test: HTTPS Zugriff 
+### **2. Test: HTTPS Zugriff**
 Um zu sehen ob der HTTPS Zugriff auf die phpmyadmin Seite funtioniert hat oder nicht, muss ich beim URL einfach die HTTP anfrage zu einer HTTPS umschreiben
 
 
@@ -270,3 +270,18 @@ Und wie man sieht hat das ganze gut funktioniert und man kommt auf die Login-Sei
 Das verwendete Zertifikat:
 
 ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/cert.PNG "HTTPS Anfrage")
+
+
+### **3. Test: HTTP Redirect**
+
+Damit ich den Redirect testen kann muss ich einfach die phpmyadmin Seite mit http im der Url ausführen.
+
+**Resultat:**
+
+Also muss ich diese URL eingeben http://192.168.1.99/phpmyadmin
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/http.PNG "HTTP Anfrage")
+
+Und wie man sieht, man wird direkt zu https redirected und man kommt auf die Login-Seite.
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/site.PNG "HTTPS Anfrage")

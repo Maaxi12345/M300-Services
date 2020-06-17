@@ -129,3 +129,16 @@ In `sites-enabled/default-ssl.conf` folgede Dinge eingetragen:
    ```
 
 Ich habe die beiden "Blöcke so eingefügt, dass es ein wenig Sinn macht. Siehe auch [**default-ssl**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/sites-enabled/default-ssl) (bei Zeile 8 & 84)
+
+**Schritt 3**
+
+Der apache2 Service muss restartet werden.
+
+* Im provision.sh wird gegen ende folgende zeile verwendet:
+  
+```Ruby
+  service apache2 restart
+  ```
+
+Siehe auch [**provision.sh**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/provision.sh) (Zeile 40)
+***

@@ -251,3 +251,21 @@ Bringing machine 'web' up with 'virtualbox' provider...
 ```
 
 Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")
+
+### 2. Test: HTTPS Zugriff 
+Um zu sehen ob der HTTPS Zugriff auf die phpmyadmin Seite funtioniert hat oder nicht, muss ich beim URL einfach die HTTP anfrage zu einer HTTPS umschreiben
+
+
+**Resultat:**
+
+Also http://192.168.1.99/phpmyadmin ===> https://192.168.1.99/phpmyadmin
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/url.PNG "HTTPS Anfrage")
+
+
+Und wie man sieht hat das ganze gut funktioniert und man kommt auf die Login-Seite.
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/site.PNG "HTTPS Anfrage")
+
+Das verwendete Zertifikat:
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/cert.PNG "HTTPS Anfrage")

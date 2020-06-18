@@ -6,7 +6,6 @@ DBPASSWD=Migros1
 apt-get update
 
 #setup mysql & phpmyadmin
-
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $DBPASSWD"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $DBPASSWD"
 debconf-set-selections <<< "phpmyadmin phpmyadmin/dbconfig-install boolean true"

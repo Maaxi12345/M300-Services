@@ -12,10 +12,26 @@ Die VM ist dazu da, um auf phpmyadmin zuzugreifen. Denn wenn ich über Hotspot v
 
 
 ___
+# Server (web)                               
 
-# Server (db)
+**Hostname:**         client 
 
-**Hostname:**         mysql
+**Memory:** 512MB
+
+**Disksize:** 40GB
+
+**CPU's:** 1
+
+**VM BOX:** hashicorp/precise32
+
+**IP:** Static (192.168.1.88)
+
+Die Applikationen und Konfigurationen die in die beziehen sich nicht auf diese Maschiene.
+
+***
+# Server (db)                               
+
+**Hostname:**         mysql 
 
 **Memory:** 512MB
 
@@ -134,7 +150,7 @@ In `sites-enabled/default-ssl.conf` folgede Dinge eingetragen:
     ServerName localhost
    ```
 
-Ich habe die beiden "Blöcke so eingefügt, dass es ein wenig Sinn macht. Siehe auch [**default-ssl**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/sites-enabled/default-ssl) (bei Zeile 8 & 84)
+Ich habe die beiden "Blöcke" so eingefügt, dass es ein wenig Sinn macht. Siehe auch [**default-ssl**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/sites-enabled/default-ssl) (bei Zeile 7 & 83)
 
 **Schritt 3**
 
@@ -146,7 +162,7 @@ Der apache2 Service muss restartet werden.
   service apache2 restart
   ```
 
-Siehe auch [**provision.sh**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/provision.sh) (Zeile 40)
+Siehe auch [**provision.sh**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/provision.sh) (Zeile 39)
 ***
 ## SSH-Tunnel
 >Ein SSH-Tunnel ist die Port-Weiterleitung eines lokalen Ports zu einem (anderen oder gleichen) Port auf dem fernen Server. Die Weiterleitung erfolgt über eine SSH-Verbindung. Das Ganze ist nicht auf bestimmte Ports oder Dienste beschränkt, sondern kann beliebig eingesetzt werden. Grundvoraussetzung zum Aufbau des SSH-Tunnels ist lediglich eine SSH-Verbindung zum Zielserver, auf dem natürlich ein SSH-Server-Dienst laufen muss.
@@ -163,6 +179,56 @@ Weitere Infos bei [**Netzmafia**](http://www.netzmafia.de/skripten/internet/ssh-
 
 >Mit einer automatischen SSL-Umstellung ist gemeint, wenn ich den Befehl "Vagrant up" ausführe, richtet sich die SSL verschlüsselung von alleine ein. Das habe ich gemacht weil ich nicht nach jedem destroy Befehl alles wieder von Hand einrichten wollte. 
 
+Um eine SSL Umstellung zu automatisieren musste ich ein wenig vorarbeit leisten.
+
+**1. Schritt: Vorbereitung**
+
+Im Verzeichniss des Vagrantfiles erstelle ich zwei neue Ordener; ssl & sites-enabled. 
+
+ habe ich das default-ssl vom Server lokal im neu erstellten Order "sites-enabled" gespeichert.
+
+
+**2. Schritt: Zertifikate generieren**
+
+Verbindung mit dem gewünschten Server als root aufbauen.
+
+Verzeichniswechsel zu /vagrant/ssl
+
+Als nächstes wird das SSL-Zertifikat generiert:
+
+ ```Ruby   
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /vagrant/ssl/nginx.key -out /vagrant/ssl/nginx.crt
+
+Country Name (2 letter code) [AU]:CH
+State or Province Name (full name) [Some-State]:Zuerich
+Locality Name (eg, city) []:Zuerich
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Max
+Organizational Unit Name (eg, section) []: Schule
+Common Name (e.g. server FQDN or YOUR name) []:max.local
+Email Address [] : max@max.local
+```
+
+**3. Schritt: Default-ssl konfigurieren**
+
+Als nächstes habe ich die SSL-Zertifikate im Default-ssl verwiesen. Dies ist im [**default-ssl**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/sites-enabled/default-ssl) auf Zeile 54 & 55.
+
+
+Zusätlich habe ich noch für ungewünschte http anfragen ein redirect eingerichtet. 
+Dies ist im [**default-ssl**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/sites-enabled/default-ssl) auf den ersten drei Zeilen zu sehen.
+
+**4. Schritt: provision.sh anpassen**
+
+Damit das im voraus erstellte default-ssl an die richtige stelle kommt, füge ich folgende Zeilen im provision.sh ein.
+
+```Ruby
+rm -rf /etc/apache2/sites-enabled
+cp -r /vagrant/sites-enabled /etc/apache2/
+```
+Somit wird der alte sites-enabled Ordner mit meinem Neuen ersetzt.
+
+**5. Schritt: SSL-Modul laden**
+
+Das mache ich auch im [**provision.sh**](https://github.com/Maaxi12345/M300-Services/blob/master/mysql/provision.sh). Und zwar auf der Zeile 32. 
 
 
 ***

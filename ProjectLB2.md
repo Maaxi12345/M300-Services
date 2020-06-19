@@ -167,12 +167,87 @@ Siehe auch [**provision.sh**](https://github.com/Maaxi12345/M300-Services/blob/m
 ## SSH-Tunnel
 >Ein SSH-Tunnel ist die Port-Weiterleitung eines lokalen Ports zu einem (anderen oder gleichen) Port auf dem fernen Server. Die Weiterleitung erfolgt über eine SSH-Verbindung. Das Ganze ist nicht auf bestimmte Ports oder Dienste beschränkt, sondern kann beliebig eingesetzt werden. Grundvoraussetzung zum Aufbau des SSH-Tunnels ist lediglich eine SSH-Verbindung zum Zielserver, auf dem natürlich ein SSH-Server-Dienst laufen muss.
 
+Folgende 3 Commannds eingeben:
+```Ruby
+ssh -L 8999:localhost:80 web01 -N &
+netstat -tulpen
+curl http://localhost:8999
+```
+
+**Output:**
+```Ruby
+root@mysql:/home/vagrant# ssh -L 8999:localhost:80 192.168.1.88 -N &
+[2] 4033
+root@mysql:/home/vagrant# netstat -tulpen
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       User       Inode       PID/Program name
+tcp        0      0 0.0.0.0:53190           0.0.0.0:*               LISTEN      105        9147        721/rpc.statd
+tcp        0      0 127.0.0.1:8999          0.0.0.0:*               LISTEN      0          25081       4033/ssh
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      106        9978        994/mysqld
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      0          8965        663/rpcbind
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      0          23466       3861/apache2
+tcp        0      0 127.0.0.1:8080          0.0.0.0:*               LISTEN      0          15508       2658/ssh
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      0          11050       1361/sshd
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      0          23469       3861/apache2
+tcp        0      0 127.0.0.1:8000          0.0.0.0:*               LISTEN      0          16909       3056/ssh
+tcp6       0      0 ::1:8999                :::*                    LISTEN      0          25080       4033/ssh
+tcp6       0      0 :::37449                :::*                    LISTEN      105        9155        721/rpc.statd
+tcp6       0      0 :::111                  :::*                    LISTEN      0          8968        663/rpcbind
+tcp6       0      0 ::1:8080                :::*                    LISTEN      0          15507       2658/ssh
+tcp6       0      0 :::22                   :::*                    LISTEN      0          11052       1361/sshd
+tcp6       0      0 ::1:8000                :::*                    LISTEN      0          16908       3056/ssh
+udp        0      0 0.0.0.0:833             0.0.0.0:*                           0          8964        663/rpcbind
+udp        0      0 127.0.0.1:897           0.0.0.0:*                           0          9136        721/rpc.statd
+udp        0      0 0.0.0.0:53223           0.0.0.0:*                           105        9144        721/rpc.statd
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           0          9428        806/dhclient3
+udp        0      0 0.0.0.0:111             0.0.0.0:*                           0          8963        663/rpcbind
+udp        0      0 192.168.1.99:123        0.0.0.0:*                           0          11710       1591/ntpd
+udp        0      0 10.0.2.15:123           0.0.0.0:*                           0          11709       1591/ntpd
+udp        0      0 127.0.0.1:123           0.0.0.0:*                           0          11708       1591/ntpd
+udp        0      0 0.0.0.0:123             0.0.0.0:*                           0          11701       1591/ntpd
+udp6       0      0 :::833                  :::*                                0          8967        663/rpcbind
+udp6       0      0 :::41848                :::*                                105        9150        721/rpc.statd
+udp6       0      0 :::111                  :::*                                0          8966        663/rpcbind
+udp6       0      0 fe80::a00:27ff:fe7d:123 :::*                                0          11713       1591/ntpd
+udp6       0      0 fe80::a00:27ff:fee8:123 :::*                                0          11712       1591/ntpd
+udp6       0      0 ::1:123                 :::*                                0          11711       1591/ntpd
+udp6       0      0 :::123                  :::*                                0          11702       1591/ntpd
+root@mysql:/home/vagrant# curl http://localhost:8999
+channel 2: open failed: connect failed: Connection refused
+curl: (52) Empty reply from server
+root@mysql:/home/vagrant#
+
+```
 
 Weitere Infos bei [**Netzmafia**](http://www.netzmafia.de/skripten/internet/ssh-tunnel.html)
 
 ***
 ## Benutzer & Rechteverwaltung
+ .|Eigentümer|Gruppe|SOnstige
+ ----|---------|------|---------|
+**Leserecht**|r - - | r-- | r - -|
+**Schreibrecht**| - w - |- w - |- w - | 
+**Ausführrecht** |- - x | - - x | - -x |
 
+Wie würde es als zahl aussehen:
+
+* r = 4
+* w = 2
+* x = 1
+
+Beispiele:
+
+* `rwx r-- r--` ==> 744
+*  `rw- --- ---` ==> 600
+*  `--x --- ---` ==> 100
+
+Folgende Befehle dienen zum ändern der Rechte:
+
+| Befehl        | Funktion                                             |Beipiel
+| ------------- | ---------------------------------------------------- | ------------
+| `chmod`       | Dient zum Setzen der Dateirechte                     |*chmod 600 /vagrant/ssl*
+| `chown`       | Dient zum Ändern des Dateibesitzers                  |*chown root meinedatei.txt*
+| `chgrp`       | Dient zum Ändern der Gruppe einer Datei              |*chgrp root meinedatei.txt*
 
 ***
 ## Automatische SSL Umstellung

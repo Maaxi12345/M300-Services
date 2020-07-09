@@ -85,6 +85,68 @@ d.run "apache", image: "httpd", args: " -v /var/www/html/:/usr/local/apache2/htd
 
 ## Testing
 
+### **1. Test: Startup**
+
+Bei diesem Test geht es um das Starten der Vagrant Maschine mit der Apache-Docker
+
+Dafür habe ich im enstrechendem Verzeichniss den Command  *`Vagrant up`* aus geführt.
+
+```Ruby
+$  vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Importing base box 'ubuntu/xenial64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'ubuntu/xenial64' version '20200630.0.0' is up to date...
+==> default: A newer version of the box 'ubuntu/xenial64' for provider 'virtualbox' is
+==> default: available! You currently have version '20200630.0.0'. The latest is version
+==> default: '20200708.0.0'. Run `vagrant box update` to update.
+==> default: Setting the name of the VM: Container_default_1594315767530_82498
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 8080 (guest) => 8080 (host) (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+<snip>
+==> default: [vagrant-hostsupdater] Checking for host entries
+==> default: Mounting shared folders...
+    default: /vagrant => C:/Users/u69372/Desktop/TBZ/3 Lehrjahr/300/repository300/M300-Services/Container
+    default: /var/www/html => C:/Users/u69372/Desktop/TBZ/3 Lehrjahr/300/repository300/M300-Services/Container/www
+==> default: Running provisioner: docker...
+    default: Installing Docker onto machine...
+<snip>
+==> default: Status: Downloaded newer image for httpd:latest
+==> default: docker.io/library/httpd:latest
+==> default: Starting Docker containers...
+==> default: -- Container: apache
+```
+Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")
+
+### **2. Test: Website Aufruf**
+Um zu schauen ob die Vagrant-Docker Maschine auch funktioniert versuche ich das index.html über den Browser zu öffnen.
+
+Dafür muss ich im Browser einfach localhost:8080 eingeben.
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/web.PNG "WebResult")
+
+### **3. Test: phpmyadmin**
+Bei diesem Test überprüfe ich die Funktionalität der Kombinierten Container (mysql/phpmyadmin)
+
+Weil ich das ganze auf dem TBZ MAAS erstellt habe, muss ich dementsprechend auch dessen IP Adresse mit dem jeweilig bestimmten Port angeben. 192.168.133.23:8081
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/phpmylog.PNG "Login")
+
+Und hier noch wenn ich mich einlogge:
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/phpmyhome.PNG "Homescreen")
+
+
+
+
+
 # K4 
 
 ## Service-Überwachung
@@ -103,9 +165,15 @@ docker run -d --name cadvisor -v /:/rootfs:ro -v /var/run:/var/run:rw -v /sys:/s
 
 Ich hatte am Anfang noch Probleme den Port richtig zu Forwarden, doch schlussendlich kam ich doch noch drauf.
 
-Um mich auf das Web Ui:
+Um mich auf das Web Ui zu verbinden gib ich folgendes in der URL ein.
 http://192.168.23:8181
 
 **WEB UI:**
 
 ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/cadweb.PNG "Cadvisor")
+
+## Container-Absicherung
+
+* Die Container laufen in einer VM oder auf einem dedizierten Host, um zu vermeiden, dass andere Benutzer oder Services angegriffen werden können.
+* Alle Container laufen mit aktueller Software und im Produktivmodus – Debug-Informationen sind abgeschaltet.
+* AppArmor oder SELinux sind auf dem Host aktiviert

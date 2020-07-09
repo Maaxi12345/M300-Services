@@ -125,6 +125,8 @@ Bringing machine 'default' up with 'virtualbox' provider...
 ```
 Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")
 
+<br>
+
 ### **2. Test: Website Aufruf**
 Um zu schauen ob die Vagrant-Docker Maschine auch funktioniert versuche ich das index.html über den Browser zu öffnen.
 
@@ -133,6 +135,8 @@ Dafür muss ich im Browser einfach localhost:8080 eingeben.
 ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/web.PNG "WebResult")
 
 Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")
+
+<br>
 
 ### **3. Test: phpmyadmin**
 Bei diesem Test überprüfe ich die Funktionalität der Kombinierten Container (mysql/phpmyadmin)

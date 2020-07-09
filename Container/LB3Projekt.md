@@ -43,15 +43,32 @@ ubuntu@m300-23-st17d:~$ docker run --name maxphpmyadmin -d --link maxsql:db -p 8
 ```
 <br>
 
-## Volumes zu persistenten Datenablage
+## Volumes zur persistenten Datenablage
 Um diese Kompetenz zu erreichen habe ich einfach einen zusätzlichen Docker erstellt. Und zwar einen, der bei mir Lokal über eine Vagrant Maschine läuft
 
 Das Vagrantfile dazu ist [**hier**](https://github.com/Maaxi12345/M300-Services/blob/master/Container/Vagrantfile)
 
 ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/volume.PNG "Volumisierung")
 
+<br>
+1. Schritt
 
+Ich verbinde die beiden Verzeichnisse über einen Synced folder den ich im Vagrantfile eingerichtet habe
+```Ruby
+config.vm.synced_folder "./www", "/var/www/html/"
+```
 
+<br>
+2. Schritt
+
+Die Verzeichnisse verden über ein Volume miteinander gesynct. Das mache ich auch im Vagrantfile, beim teil wo es den Container startet.
+```Ruby
+d.run "apache", image: "httpd", args: " -v /var/www/html/:/usr/local/apache2/htdocs/ -p 8080:80 --restart=always"
+```
+
+```Ruby
+-v /var/www/html/:/usr/local/apache2/htdocs/
+```
 
 ## Befehle
 

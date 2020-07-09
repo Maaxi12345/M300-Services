@@ -1,4 +1,4 @@
-# Project LB2
+# Project LB3
 Repository 4 Modul 300. Owner Maximilian
 
 ##Einleitung
@@ -41,10 +41,17 @@ ubuntu@m300-23-st17d:~$ docker pull phpmyadmin/phpmyadmin
 ```Ruby
 ubuntu@m300-23-st17d:~$ docker run --name maxphpmyadmin -d --link maxsql:db -p 8081:80 phpmyadmin/phpmyadmin
 ```
-
-
-
 <br>
+
+## Volumes zu persistenten Datenablage
+Um diese Kompetenz zu erreichen habe ich einfach einen zusätzlichen Docker erstellt. Und zwar einen, der bei mir Lokal über eine Vagrant Maschine läuft
+
+Das Vagrantfile dazu ist [**hier**](https://github.com/Maaxi12345/M300-Services/blob/master/Container/Vagrantfile)
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/volume.PNG "Volumisierung")
+
+
+
 
 ## Befehle
 

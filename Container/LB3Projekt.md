@@ -81,3 +81,31 @@ d.run "apache", image: "httpd", args: " -v /var/www/html/:/usr/local/apache2/htd
 | `docker start [id]`            | Startet den Docker-Container                           |
 | `docker stop`            | Stoppt den Docker-Container                                 |
 | `docker kill`         | Killt den Docker-Container                   |
+
+
+## Testing
+
+# K4 
+
+## Service-Überwachung
+
+Ich überwache meinen Host mit Cadvisor. Cadvisor analysiert den Ressourcenverbrauch und Performance-Charakteristiken von laufenden Containern.
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/cad.PNG "Cadvisor")
+
+**Installation:**
+
+Mit einem Command
+```Ruby
+docker run -d --name cadvisor -v /:/rootfs:ro -v /var/run:/var/run:rw -v /sys:/sys:ro -v /var/lib/docker/:/var/lib/docker:ro -p 8181:8080 google/cadvisor:latest
+```
+
+
+Ich hatte am Anfang noch Probleme den Port richtig zu Forwarden, doch schlussendlich kam ich doch noch drauf.
+
+Um mich auf das Web Ui:
+http://192.168.23:8181
+
+**WEB UI:**
+
+![](https://github.com/Maaxi12345/M300-Services/blob/master/img/cadweb.PNG "Cadvisor")

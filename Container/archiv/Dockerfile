@@ -1,3 +1,2 @@
-FROM php:7.2-apache
-COPY web/ /var/www/html/
-EXPOSE 80
+FROM httpd
+COPY ./web/ /usr/local/apache2/htdocs/

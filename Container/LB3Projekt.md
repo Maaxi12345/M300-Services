@@ -151,7 +151,7 @@ Und hier noch wenn ich mich einlogge:
 
 Dieser Test hat erfolgreich geklappt. ![](https://github.com/Maaxi12345/M300-Services/blob/master/img/daumen.png "daumen")
 
-
+<br>
 
 # K4 
 
@@ -183,3 +183,11 @@ http://192.168.23:8181
 * Die Container laufen in einer VM oder auf einem dedizierten Host, um zu vermeiden, dass andere Benutzer oder Services angegriffen werden können.
 * Alle Container laufen mit aktueller Software und im Produktivmodus – Debug-Informationen sind abgeschaltet.
 * AppArmor oder SELinux sind auf dem Host aktiviert
+
+
+<br>
+
+## Fazit
+
+Ich habe meiner Meinung nach sehr viel neues zum Theama Docker erfahren und dazugelernt. Dieses neue Wissen kann ich dann in der Zukunft bei der Arbeit benützen kann. Ich weiss eben, dass ich Docker bei der Arbeit brauchen werde. 
+Mir hat dieses Modul äusserst gefallen, da wir sehr viel alleine Arbeiten konnten, was ich auch gemacht habe. Für die LB3 habe ich mit Maksim vom Samstag bis Donnerstag jeden Tag abgemacht um daran zu arbeiten.
